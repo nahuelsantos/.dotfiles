@@ -1,14 +1,35 @@
 # dotfiles
-This repository is where I keep the dotfiles I'm currently using in my development setup.
-The OS is macOS Sequoia and my editor of choice is Neovim.
-My env is highly customized and adapted to my workflow, I am currently using [GNU Stow](https://www.gnu.org/software/stow/) for an easy handling of all my configuration. 
+This repository contains the dotfiles I'm currently using in my development setup.
+
+## Requirements
+
+Make sure that you have the following installed in your system
+
+### Git
 
 ```zsh
-For using stow just clone this repo in your $HOME foler and run stow .
-git clone https://github.com/nahuelsantos/.dotfiles.git
-cd .dotfiles
-stow .
+brew install git
 ```
+
+### GNU Stow
+
+I am currently using [GNU Stow](https://www.gnu.org/software/stow/) for an easy handling of all my configuration. 
+
+```zsh
+brew install stow
+```
+
+## Installation
+
+For using stow just clone this repo in your $HOME foler and run stow .
+
+```zsh
+$ git clone https://github.com/nahuelsantos/.dotfiles.git
+$ cd .dotfiles
+$ stow .
+```
+
+## Troubleshooting
 
 For ignoring files to be symlinked you can use the .stow-local-ignore file
 
@@ -17,3 +38,4 @@ If you have a conflict between files in your $HOME/.config directory and the .do
 ```zsh
 stow --adopt . 
 ```
+https://www.youtube.com/watch?v=y6XCebnB9gs
