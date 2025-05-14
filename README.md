@@ -16,7 +16,7 @@ brew install git
 I am currently using [GNU Stow](https://www.gnu.org/software/stow/) for an easy handling of all my configuration. 
 
 ```zsh
-brew install git
+brew install stow
 ```
 
 ## Installation
