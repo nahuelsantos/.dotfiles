@@ -19,6 +19,18 @@ I am currently using [GNU Stow](https://www.gnu.org/software/stow/) for an easy 
 brew install stow
 ```
 
+### fzf
+
+```zsh
+brew install fzf
+```
+
+### zoxide
+
+```zsh
+brew install zoxide
+```
+
 ## Installation
 
 For using stow just clone this repo in your $HOME foler and run stow .
@@ -39,3 +51,8 @@ If you have a conflict between files in your $HOME/.config directory and the .do
 stow --adopt . 
 ```
 https://www.youtube.com/watch?v=y6XCebnB9gs
+
+## References
+[Catppuccin tmux](https://github.com/catppuccin/tmux)
+[Catppuccin nvim](https://github.com/catppuccin/nvim)
+[GNU Stow](https://www.gnu.org/software/stow/)

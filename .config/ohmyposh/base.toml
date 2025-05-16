@@ -2,16 +2,45 @@ console_title_template = '{{ .Shell }} in {{ .Folder }}'
 version = 3
 final_space = true
 
+[palette]
+  base = '#1E1E2E'
+  blue = '#89B4FA'
+  flamingo = '#f2CDCD'
+  green = '#A6E3A1'
+  grey = '#585B70'
+  lavender = '#B4BEFE'
+  maroon = '#EBA0AC'
+  mauve = '#CBA6F7'
+  magenta = '#BAC2DE'
+  peach = '#FAB387'
+  pink = '#F5C2E7'
+  red = '#F38BA8'
+  rosewater = '#F5E0DC'
+  sapphire = '#74C7EC'
+  sky = '#89DCEB'
+  surface0 = '#313244'
+  surface1 = '#45475A'
+  teal = '#94E2D5'
+  text = '#CDD6F4'
+  yellow = '#F9E2AF'
+  white = '#FFFFFF'
+
+[upgrade]
+  source = 'cdn'
+  interval = '168h'
+  auto = false
+  notice = false
+
 [[blocks]]
   type = 'prompt'
   alignment = 'left'
-  newline = true
+  newline = false
 
   [[blocks.segments]]
     type = 'path'
     style = 'plain'
     background = 'transparent'
-    foreground = 'blue'
+    foreground = 'p:pink'
     template = '{{ .Path }}'
 
     [blocks.segments.properties]
@@ -26,7 +55,7 @@ final_space = true
 
     [blocks.segments.properties]
       branch_icon = ''
-      commit_icon = '@'
+      commit_icon = ' '
       fetch_status = true
 
 [[blocks]]
@@ -36,12 +65,58 @@ final_space = true
   [[blocks.segments]]
     type = 'executiontime'
     style = 'plain'
-    foreground = 'yellow'
+    foreground = 'p:yellow'
     background = 'transparent'
     template = '{{ .FormattedMs }}'
 
     [blocks.segments.properties]
-      threshold = 5000
+      threshold = 1000
+
+  [[blocks.segments]]
+    type = 'python'
+    style = 'plain'
+    foreground = '#906CFF'
+    background = 'transparent'
+    template = "  {{ .Full }} "
+
+    [blocks.segments.properties]
+      fetch_virtual_env = true
+
+  [[blocks.segments]]
+    type = 'node'
+    style = 'plain'
+    foreground = '#6CA35E'
+    background = 'transparent'
+    template = "  {{ .Full }} "
+
+  [[blocks.segments]]
+    type = 'dotnet'
+    style = 'plain'
+    foreground = 'p:white'
+    background = 'transparent'
+    template = "  {{ .Full }} "
+
+  [[blocks.segments]]
+    type = 'go'
+    style = 'plain'
+    foreground = '#7FD5EA'
+    background = 'transparent'
+    template = "  {{ .Full }} "
+
+  [[blocks.segments]]
+    type = 'ruby'
+    style = 'plain'
+    foreground = '#4063D8'
+    background = 'transparent'
+    template = "  {{ .Full }}"
+
+  [[blocks.segments]]
+    type = 'java'
+    style = 'plain'
+    foreground = '#4063D8'
+    background = 'transparent'
+    template = "  {{ .Full }}"
+
 
 [[blocks]]
   type = 'prompt'
@@ -52,21 +127,21 @@ final_space = true
     type = 'text'
     style = 'plain'
     foreground_templates = [
-      "{{if gt .Code 0}}red{{end}}",
-      "{{if eq .Code 0}}magenta{{end}}",
+      "{{if gt .Code 0}}p:red{{end}}",
+      "{{if eq .Code 0}}p:magenta{{end}}",
     ]
     background = 'transparent'
     template = '❯'
 
 [transient_prompt]
   foreground_templates = [
-    "{{if gt .Code 0}}red{{end}}",
-    "{{if eq .Code 0}}magenta{{end}}",
+    "{{if gt .Code 0}}p:red{{end}}",
+    "{{if eq .Code 0}}p:magenta{{end}}",
   ]
   background = 'transparent'
   template = '❯ '
 
 [secondary_prompt]
-  foreground = 'magenta'
+  foreground = 'p:magenta'
   background = 'transparent'
   template = '❯❯ '

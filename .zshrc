@@ -5,12 +5,13 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 source "${ZINIT_HOME}/zinit.zsh"
 
 # Aliases
-alias l="colorls" # List files in current directory
-alias ll="colorls -al" # List all files in long list format
-alias ls="colorls"
+alias ls="colorls -1a"
+alias ld="colorls -1a --dirs"
 alias o="open ." # Open finder in current directory
 alias trcms="tye run --tags caac"
 alias trweb="tye run --watch --debug --tags mobile"
+alias vim='nvim'
+alias c='clear'
 
 # Plugins
 zinit light zsh-users/zsh-autosuggestions
@@ -94,4 +95,5 @@ fi
 
 if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
   eval "$(oh-my-posh init zsh --config ~/.dotfiles/.config/ohmyposh/base.toml)"
+  #eval "$(oh-my-posh init zsh --config https://github.com/JanDeDobbeleer/oh-my-posh/blob/main/themes/catppuccin_mocha.omp.json)"
 fi
