@@ -41,6 +41,12 @@ $ cd .dotfiles
 $ stow .
 ```
 
+## zsh configuration
+We need to create a symbolic link for .zshenv in your home directory:
+```zsh
+ln -sf ~/.config/zsh/.zshenv ~/.zshenv
+```
+
 ## Troubleshooting
 
 For ignoring files to be symlinked you can use the .stow-local-ignore file

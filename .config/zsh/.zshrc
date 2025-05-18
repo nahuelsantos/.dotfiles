@@ -7,7 +7,7 @@ source "${ZINIT_HOME}/zinit.zsh"
 # Aliases
 alias ls="colorls -1a"
 alias ld="colorls -1a --dirs"
-alias o="open ." # Open finder in current directory
+alias o='if command -v cursor >/dev/null 2>&1; then cursor .; elif command -v code >/dev/null 2>&1; then code .; else nvim .; fi' # Open finder in current directory
 alias trcms="tye run --tags caac"
 alias trweb="tye run --watch --debug --tags mobile"
 alias vim='nvim'
@@ -53,7 +53,9 @@ source <(zoxide init zsh)
 ### NVM ###
 ###########
 export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+# Load NVM lazily by not immediately using a version.
+# NVM will still pick up .nvmrc when changing directories or you can manually run 'nvm use'.
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --no-use
 
 ###############################
 ### Add .NET Core SDK tools ###
@@ -65,7 +67,9 @@ export PATH="$PATH:/Users/nahuelsantos/.dotnet/tools"
 #############
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
+if command -v pyenv &>/dev/null; then
+  eval "$(pyenv init -)" # Initializes pyenv shims and autocompletion. This command itself can contribute to startup time.
+fi
 
 ##############
 ### chruby ###
