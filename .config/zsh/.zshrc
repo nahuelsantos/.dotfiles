@@ -4,9 +4,19 @@ ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
 [ ! -d $ZINIT_HOME/.git ] && git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
 source "${ZINIT_HOME}/zinit.zsh"
 
+# FZF History Search
+fh() {
+  print -z $( ([ -n "$ZSH_NAME" ] && fc -l 1 || history) | fzf +s --tac | sed -E 's/ *[0-9]*\*? *//' | sed -E 's/\\/\\\\/g')
+}
+zle -N fh
+bindkey '^R' fh
+
 # Aliases
-alias ls="colorls -1a"
-alias ld="colorls -1a --dirs"
+alias ls="eza --icons --group-directories-first -1"
+alias ld="eza --icons --group-directories-first --only-dirs"
+alias ll="eza --icons --group-directories-first --long"
+alias la="eza --icons --group-directories-first -1 --all"
+alias lt="eza --icons --group-directories-first --tree"
 alias o='if command -v cursor >/dev/null 2>&1; then cursor .; elif command -v code >/dev/null 2>&1; then code .; else nvim .; fi' # Open finder in current directory
 alias trcms="tye run --tags caac"
 alias trweb="tye run --watch --debug --tags mobile"

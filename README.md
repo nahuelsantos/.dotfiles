@@ -19,6 +19,12 @@ I am currently using [GNU Stow](https://www.gnu.org/software/stow/) for an easy 
 brew install stow
 ```
 
+### eza
+
+```zsh
+brew install eza
+```
+
 ### fzf
 
 ```zsh
