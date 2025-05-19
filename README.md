@@ -5,6 +5,16 @@ This repository contains the dotfiles I'm currently using in my development setu
 
 Make sure that you have the following installed in your system
 
+### Oh my Posh
+
+```zsh
+# If you have brew
+brew install jandedobbeleer/oh-my-posh/oh-my-posh
+
+#or for linux
+curl -s https://ohmyposh.dev/install.sh | bash -s
+```
+
 ### Git
 
 ```zsh
