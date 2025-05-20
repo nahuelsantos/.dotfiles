@@ -5,8 +5,6 @@ if [[ "$OSTYPE" == "darwin"* ]]; then
         eval "$(/opt/homebrew/bin/brew shellenv)"
     fi
 
-    # macOS specific tools
-
     # macOS specific prompt
     if [ "$TERM_PROGRAM" != "Apple_Terminal" ]; then
         eval "$(oh-my-posh init zsh --config ~/.dotfiles/.config/ohmyposh/base.toml)"

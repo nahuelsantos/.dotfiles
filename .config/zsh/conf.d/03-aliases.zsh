@@ -1,3 +1,7 @@
+# Basic aliases
+alias vim='nvim'
+alias c='clear' 
+
 # Editor and file management aliases
 alias ls="eza --icons --group-directories-first -1"
 alias ld="eza --icons --group-directories-first --only-dirs"

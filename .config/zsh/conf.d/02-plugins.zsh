@@ -10,7 +10,3 @@ zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-completions
 zinit light Aloxaf/fzf-tab
 zinit snippet OMZP::git
-
-# Initialize completions
-autoload -Uz compinit
-compinit -D 
