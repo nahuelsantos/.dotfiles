@@ -17,6 +17,10 @@ if command -v fzf &>/dev/null; then
     fi
 fi
 
+# Initialize completions
+autoload -Uz compinit
+compinit -D 
+
 # Zoxide integration
 if command -v zoxide &>/dev/null; then
     eval "$(zoxide init zsh)"
