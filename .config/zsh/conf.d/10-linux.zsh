@@ -1,9 +1,9 @@
 # Linux specific configuration
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
     # Set consistent locale settings
-    export LANG=en_US.UTF-8
-    export LANGUAGE=en_US.UTF-8
-    export LC_ALL=en_US.UTF-8
+    export LANG=en_GB.utf8
+    export LANGUAGE=en_GB.utf8
+    export LC_ALL=en_GB.utf8
     
     # Linux specific tools
 
