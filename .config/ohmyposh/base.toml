@@ -63,6 +63,13 @@ final_space = true
   overflow = 'hidden'
 
   [[blocks.segments]]
+    type = 'os'
+    style = 'plain'
+    foreground = 'p:sky'
+    background = 'transparent'
+    template = '{{ if .Env.SSH_CONNECTION  }}@{{ .HostName }}{{ end }}' 
+    
+  [[blocks.segments]]
     type = 'executiontime'
     style = 'plain'
     foreground = 'p:yellow'
