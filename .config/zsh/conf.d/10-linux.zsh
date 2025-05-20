@@ -1,5 +1,10 @@
 # Linux specific configuration
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    # Set consistent locale settings
+    export LANG=en_US.UTF-8
+    export LANGUAGE=en_US.UTF-8
+    export LC_ALL=en_US.UTF-8
+    
     # Linux specific tools
 
     # Linux specific prompt - only use oh-my-posh if available
