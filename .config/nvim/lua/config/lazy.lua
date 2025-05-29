@@ -78,6 +78,7 @@ require("lazy").setup({
     config = function()
       -- Mason setup
       require("mason").setup({
+        ensure_installed = { "delve" },
         ui = {
           border = "rounded",
           icons = {
@@ -90,7 +91,7 @@ require("lazy").setup({
 
       -- Mason LSP config
       require("mason-lspconfig").setup({
-        ensure_installed = { "lua_ls" },
+        ensure_installed = { "lua_ls", "gopls" },
         automatic_installation = true,
       })
 
@@ -116,6 +117,17 @@ require("lazy").setup({
           }
         }
       })
+      lspconfig.gopls.setup({
+        on_attach = on_attach,
+        settings = {
+          gopls = {
+            analyses = {
+              unusedparams = true,
+            },
+            staticcheck = true,
+          },
+        },
+      })
     end,
   },
 
@@ -125,7 +137,7 @@ require("lazy").setup({
     build = ":TSUpdate",
     config = function()
       require("nvim-treesitter.configs").setup({
-        ensure_installed = { "lua", "vim", "vimdoc" },
+        ensure_installed = { "lua", "vim", "vimdoc", "go" },
         auto_install = true,
         highlight = { enable = true },
       })
@@ -142,6 +154,121 @@ require("lazy").setup({
       vim.keymap.set('n', '<leader>fg', builtin.live_grep, {})
       vim.keymap.set('n', '<leader>fb', builtin.buffers, {})
       vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
+    end,
+  },
+
+  -- Debugging with nvim-dap
+  {
+    "mfussenegger/nvim-dap",
+    dependencies = {
+      "rcarriga/nvim-dap-ui",
+      "theHamsta/nvim-dap-virtual-text",
+      "nvim-neotest/nvim-nio",
+    },
+    config = function()
+      local dap = require("dap")
+      local dapui = require("dapui")
+      local dap_virtual_text = require("nvim-dap-virtual-text")
+
+      dap_virtual_text.setup()
+
+      dapui.setup({
+        icons = { expanded = "▾", collapsed = "▸", current_frame = "󰘧" },
+        mappings = {
+          expand = { "<CR>", "<2-LeftMouse>" },
+          open = "o",
+          remove = "d",
+          edit = "e",
+          repl = "r",
+          toggle = "t",
+        },
+        layouts = {
+          {
+            elements = {
+              { id = "scopes", size = 0.25 },
+              { id = "breakpoints", size = 0.25 },
+              { id = "stacks", size = 0.25 },
+              { id = "watches", size = 0.25 },
+            },
+            size = 40,
+            position = "left",
+          },
+          {
+            elements = {
+              { id = "repl", size = 0.5 },
+              { id = "console", size = 0.5 },
+            },
+            size = 10,
+            position = "bottom",
+          },
+        },
+        floating = {
+          max_height = nil,
+          max_width = nil,
+          border = "single",
+          mappings = {
+            close = { "q", "<Esc>" },
+          },
+        },
+        windows = { indent = 1 },
+        render = {
+          max_value_lines = 100,
+        }
+      })
+
+      dap.adapters.go = {
+        type = "server",
+        port = "${port}",
+        executable = {
+          command = "dlv",
+          args = { "dap", "-l", "127.0.0.1:${port}" },
+        },
+      }
+
+      dap.configurations.go = {
+        {
+          type = "go",
+          name = "Debug (Launch)",
+          request = "launch",
+          program = "${fileDirname}",
+        },
+        {
+          type = "go",
+          name = "Debug test",
+          request = "launch",
+          mode = "test",
+          program = "${fileDirname}",
+        },
+        {
+          type = "go",
+          name = "Debug test (go.work)",
+          request = "launch",
+          mode = "test",
+          program = "${fileDirname}",
+          buildFlags = "-C ${workspaceFolder}",
+        },
+      }
+
+      vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, { desc = "Toggle Breakpoint" })
+      vim.keymap.set("n", "<leader>dc", dap.continue, { desc = "Continue" })
+      vim.keymap.set("n", "<leader>di", dap.step_into, { desc = "Step Into" })
+      vim.keymap.set("n", "<leader>do", dap.step_over, { desc = "Step Over" })
+      vim.keymap.set("n", "<leader>dO", dap.step_out, { desc = "Step Out" })
+      vim.keymap.set("n", "<leader>dr", dap.repl.open, { desc = "Open REPL" })
+      vim.keymap.set("n", "<leader>dl", dap.run_last, { desc = "Run Last" })
+      vim.keymap.set("n", "<leader>du", dapui.toggle, { desc = "Toggle DAP UI" })
+      vim.keymap.set("n", "<leader>de", dapui.eval, { desc = "Eval under cursor" })
+
+      -- Use nvim-dap listeners to integrate with nvim-dap-ui
+      dap.listeners.after.event_initialized["dapui_config"] = function()
+        dapui.open()
+      end
+      dap.listeners.before.event_terminated["dapui_config"] = function()
+        dapui.close()
+      end
+      dap.listeners.before.event_exited["dapui_config"] = function()
+        dapui.close()
+      end
     end,
   },
 }) 
