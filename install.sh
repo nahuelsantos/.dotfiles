@@ -295,7 +295,14 @@ extract_clashes() {
 }
 
 do_stow() {
-  has stow || die "stow is not installed; cannot make the symlinks"
+  if ! has stow; then
+    if (( DRY_RUN )); then
+      warn "stow is not installed yet — a real run installs it, then links:"
+      info "  stow --verbose=1 --no-folding --target=\$HOME --restow ."
+      return 0
+    fi
+    die "stow is not installed. Install it with 'brew install stow', or re-run: ./install.sh --only base"
+  fi
   [[ -d "$DOTFILES_DIR/.git" ]] || warn "$DOTFILES_DIR is not a git clone"
   # stow would otherwise create ~/.ssh with default permissions
   if [[ ! -d "$HOME/.ssh" ]]; then
