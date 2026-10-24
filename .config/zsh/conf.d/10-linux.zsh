@@ -1,12 +1,8 @@
-# Linux specific configuration
+# Linux and WSL specific configuration
+# ($OSTYPE is linux-gnu* inside WSL as well, so this covers both.)
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    # Set consistent locale settings
-    export LANG=en_GB.utf8
-    export LANGUAGE=en_GB.utf8
-    export LC_ALL=en_GB.utf8
-    
-    # Linux specific tools
-
-    eval "$(oh-my-posh init zsh --config ~/.dotfiles/.config/ohmyposh/base.toml)"
-fi 
-
+    # Homebrew on Linux or WSL, if it is installed
+    if [[ -x /home/linuxbrew/.linuxbrew/bin/brew ]]; then
+        eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    fi
+fi

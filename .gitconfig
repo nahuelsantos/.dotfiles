@@ -1,0 +1,51 @@
+# ~/.gitconfig — managed by nahuelsantos/.dotfiles.
+# Per-machine overrides (work identity, GPG signing) belong in ~/.gitconfig.local,
+# which is untracked and included last so it wins.
+
+[user]
+	name = Nahuel Santos
+	email = nahuelsantos@gmail.com
+
+[init]
+	defaultBranch = main
+
+[core]
+	editor = nvim
+	excludesfile = ~/.gitignore_global
+	autocrlf = input
+	untrackedCache = true
+
+[pull]
+	ff = only
+
+[push]
+	autoSetupRemote = true
+	default = current
+
+[fetch]
+	prune = true
+
+[rebase]
+	autoStash = true
+
+[rerere]
+	enabled = true
+
+[diff]
+	colorMoved = zebra
+
+[column]
+	ui = auto
+
+[alias]
+	st = status -sb
+	co = checkout
+	br = branch
+	lg = log --graph --pretty=format:'%C(yellow)%h%Creset %C(cyan)%ad%Creset %s %C(dim)%an%Creset' --date=short
+	amend = commit --amend --no-edit
+	unstage = restore --staged
+	last = log -1 --stat
+	aliases = config --get-regexp ^alias\\.
+
+[include]
+	path = ~/.gitconfig.local

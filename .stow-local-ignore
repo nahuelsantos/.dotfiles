@@ -1,7 +1,14 @@
+# Files in this repo that must NOT be symlinked into $HOME.
+# Patterns are perl regexes matched against the path relative to the package root.
+
 \.git
 \.gitignore
+\.github
 
 node_modules
+\.DS_Store
 
 ^/README.*
-ˆ/LICENSE.*
+^/LICENSE.*
+^/Brewfile.*
+^/install\.sh$

@@ -1,0 +1,9 @@
+# macOS-only casks. `brew bundle --file=Brewfile.macos`
+
+cask "ghostty"
+cask "font-meslo-lg-nerd-font"
+
+# Optional, uncomment as needed:
+# cask "cursor"
+# cask "raycast"
+# cask "rectangle"

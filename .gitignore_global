@@ -1,0 +1,9 @@
+# ~/.gitignore_global — managed by nahuelsantos/.dotfiles (git config core.excludesfile)
+
+.DS_Store
+Thumbs.db
+*.log
+*.swp
+*.swo
+.env
+.env.local
