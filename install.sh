@@ -252,11 +252,14 @@ install_sshkeys() {
     info "[dry-run] would print the three public keys and the ssh-copy-id lines"
     return 0
   fi
-  info "authorise each key once, from this machine:"
-  info "  ssh-copy-id -i ~/.ssh/id_ed25519_melee.pub   nahuelsantos@192.168.3.8"
-  info "  ssh-copy-id -i ~/.ssh/id_ed25519_plunder.pub nahuelsantos@192.168.3.7"
-  info "  ssh-copy-id -i ~/.ssh/id_ed25519_dinky.pub   nahuelsantos@192.168.3.11"
-  info "then verify: ssh melee hostname; ssh plunder hostname; ssh dinky hostname"
+  info "authorise each key once. Published keys are public text — they are not secrets."
+  info "ssh-copy-id only works where password auth is still on:"
+  info "  ssh-copy-id -i ~/.ssh/id_ed25519_dinky.pub dinky"
+  info "melee and plunder have PasswordAuthentication no, so append from a host that"
+  info "already has access (e.g. the old MacBook, or a console session):"
+  info "  ssh melee   'cat >> ~/.ssh/authorized_keys'   # paste the .pub line, then Ctrl-D"
+  info "  ssh plunder 'cat >> ~/.ssh/authorized_keys'   # same"
+  info "then verify here: ssh melee hostname; ssh plunder hostname; ssh dinky hostname"
 }
 
 install_macos() {

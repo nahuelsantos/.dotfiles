@@ -81,13 +81,27 @@ Host plunder   HostName 192.168.3.7    User nahuelsantos  IdentityFile ~/.ssh/id
 Host dinky     HostName 192.168.3.11   User nahuelsantos  IdentityFile ~/.ssh/id_ed25519_dinky
 ```
 
-`./install.sh --only sshkeys` generates any missing key. Authorise each one once,
-from this machine:
+`./install.sh --only sshkeys` generates any missing key. Public keys are public text;
+they are not secrets, and they are never committed here.
+
+Authorise each one once. `ssh-copy-id` needs password auth to bootstrap:
 
 ```zsh
-ssh-copy-id -i ~/.ssh/id_ed25519_melee.pub   nahuelsantos@192.168.3.8
-ssh-copy-id -i ~/.ssh/id_ed25519_plunder.pub nahuelsantos@192.168.3.7
-ssh-copy-id -i ~/.ssh/id_ed25519_dinky.pub   nahuelsantos@192.168.3.11
+ssh-copy-id -i ~/.ssh/id_ed25519_dinky.pub dinky
+```
+
+**melee and plunder run `PasswordAuthentication no`**, so a fresh machine cannot
+self-bootstrap. Append the key from a host that already has access (the previous
+machine, or a console session):
+
+```zsh
+ssh melee   'cat >> ~/.ssh/authorized_keys'   # paste the .pub line, then Ctrl-D
+ssh plunder 'cat >> ~/.ssh/authorized_keys'   # same
+```
+
+Then, from this machine:
+
+```zsh
 ssh melee hostname; ssh plunder hostname; ssh dinky hostname   # expect the hostnames back
 ```
 
