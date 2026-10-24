@@ -1,0 +1,11 @@
+# ~/.config/zsh/conf.d/99-local.zsh — machine-local shell config (gitignored).
+#
+# Copy this file to 99-local.zsh and keep anything that must not be shared
+# between machines there: employer env vars, project aliases, host-specific PATH.
+#
+#   cp ~/.config/zsh/conf.d/99-local.zsh.example ~/.config/zsh/conf.d/99-local.zsh
+#
+# Examples:
+# export PATH="$HOME/.cargo/bin:$PATH"
+# export PGPORT="5433"
+# alias serve="python3 -m http.server 8000"

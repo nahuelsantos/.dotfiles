@@ -1,5 +1,7 @@
 # Print system information
-if [[ -x "$(command -v neofetch)" ]]; then
+if command -v fastfetch >/dev/null 2>&1; then
+    fastfetch
+elif command -v neofetch >/dev/null 2>&1; then
     neofetch
 fi
 
@@ -7,4 +9,4 @@ fi
 if [[ -f "$HOME/.todo" ]]; then
     echo "\n📝 TODO List:"
     cat "$HOME/.todo"
-fi 
+fi
